@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  security-events: write   # <- Ajoute cette ligne
+
 jobs:
   build-and-scan:
     runs-on: ubuntu-latest

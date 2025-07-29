@@ -16,3 +16,11 @@ EXPOSE 5000
 
 # Default command to run the app using gunicorn
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+
+# Healthcheck pour Docker
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:5000/health || exit 1
+
+# Create a non-root user
+RUN adduser --disabled-password --gecos '' appuser
+USER appuser
